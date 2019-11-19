@@ -1,0 +1,131 @@
+# depslib dependency file v1.0
+1548079874 source:d:\pacman\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1215465208 d:\pacman\soil.h
+
+1547222593 source:d:\andre\pacman\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	"mapa.txt"
+
+1215465208 d:\andre\pacman\soil.h
+
+1547219672 d:\andre\pacman\mapa.txt
+
+1547637083 d:\pacman\mapa.txt
+
+1547550409 d:\pacman\utils.h
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+
+1547550687 source:d:\pacman\utils.c
+	"utils.h"
+
+1548079156 source:d:\pacman\pacman.c
+	"pacman.h"
+
+1548079162 d:\pacman\pacman.h
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+
+1548088687 source:d:\andre\levar ufu\pacman\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1215465208 d:\andre\levar ufu\pacman\soil.h
+
+1547546809 d:\andre\levar ufu\pacman\utils.h
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+
+1547547087 source:d:\andre\levar ufu\pacman\utils.c
+	"utils.h"
+
+1547633483 d:\andre\levar ufu\pacman\mapa.txt
+
+1548171863 source:d:\andre\levar ufu\pacman\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+
+1548170362 d:\andre\levar ufu\pacman\pacman.h
+
+1548334521 source:d:\facomufu\video aulas\video aula pacman\pacman\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1215465208 d:\facomufu\video aulas\video aula pacman\pacman\soil.h
+
+1548173962 d:\facomufu\video aulas\video aula pacman\pacman\pacman.h
+
+1548334616 source:d:\facomufu\video aulas\video aula pacman\pacman\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+
+1548327416 source:d:\andre\facom ufu\exemplos\pacman\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+
+1215461608 d:\andre\facom ufu\exemplos\pacman\soil.h
+
+1548166762 d:\andre\facom ufu\exemplos\pacman\pacman.h
+
+1574164896 source:c:\users\ingressante\documents\pacman\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1574164896 c:\users\ingressante\documents\pacman\soil.h
+
+1574164896 c:\users\ingressante\documents\pacman\pacman.h
+
+1574164896 source:c:\users\ingressante\documents\pacman\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+
