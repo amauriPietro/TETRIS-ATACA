@@ -12,7 +12,7 @@ void DisableOpenGL(HWND, HDC, HGLRC);
 // Define as variáveis e funções que irão controlar o jogo
 Pacman *pac;
 Cenario *cen;
-Phantom *ph[4];
+//Phantom *ph[4];
 
 void desenhaJogo();
 void iniciaJogo();
@@ -139,16 +139,19 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                     PostQuitMessage(0);
                     break;
                 case VK_RIGHT: //Pressionou seta direita?
-                    pacman_AlteraDirecao(pac,0,cen);
+                    //comanda_Cursor(pac,0,cen);
                     break;
                 case VK_DOWN: //Pressionou seta para baixo?
-                    pacman_AlteraDirecao(pac,1,cen);
+                    //comanda_Cursor(pac,1,cen);
                     break;
                 case VK_LEFT: //Pressionou seta esquerda?
-                    pacman_AlteraDirecao(pac,2,cen);
+                    //comanda_Cursor(pac,2,cen);
                     break;
                 case VK_UP: //Pressionou seta para cima?
-                    pacman_AlteraDirecao(pac,3,cen);
+                    //comanda_Cursor(pac,3,cen);
+                    break;
+                case VK_SPACE: //Pressionou seta para cima?
+                    //comanda_Cursor(pac,4,cen);
                     break;
             }
         }
@@ -213,32 +216,27 @@ void DisableOpenGL (HWND hwnd, HDC hDC, HGLRC hRC)
 // Função que desenha cada componente do jogo
 void desenhaJogo(){
     cenario_desenha(cen);
-    if(pacman_vivo(pac)){
-        pacman_movimenta(pac, cen);
-        pacman_desenha(pac);
-        int i;
-        for(i=0; i<4; i++){
-            phantom_movimenta(ph[i], cen, pac);
-            phantom_desenha(ph[i]);
-        }
-    }
+//     if(pacman_vivo(pac)){
+//        //pacman_movimenta(pac, cen);
+//        pacman_desenha(pac);
+//        int i;
+//    }
 
 }
 // Função que inicia o mapa do jogo e as posições iniciais dos personagens
 void iniciaJogo(){
     srand(time(NULL));
-    cen = cenario_carrega("mapa.txt");
-    pac = pacman_create(9,11);
-    int i;
-    for(i=0; i<4; i++)
-        ph[i] = phantom_create(9,9);
+    cen = cenario_carrega();
+    //pac = pacman_create(9,11);
+
 }
+
 // Função que libera os dados do jogo
 void terminaJogo(){
     int i;
     for(i=0; i<4; i++)
-        phantom_destroy(ph[i]);
+        //phantom_destroy(ph[i]);
 
-    pacman_destroy(pac);
+    //pacman_destroy(pac);
     cenario_destroy(cen);
 }
