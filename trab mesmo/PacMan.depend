@@ -129,3 +129,24 @@
 	"SOIL.h"
 	"pacman.h"
 
+1574717781 source:c:\users\amauri pietropaolo\desktop\dametucosicha\trabalhogbc014\tetris xd\tetris-ataca\trab mesmo\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1574453276 c:\users\amauri pietropaolo\desktop\dametucosicha\trabalhogbc014\tetris xd\tetris-ataca\trab mesmo\soil.h
+
+1574717781 c:\users\amauri pietropaolo\desktop\dametucosicha\trabalhogbc014\tetris xd\tetris-ataca\trab mesmo\pacman.h
+
+1574720396 source:c:\users\amauri pietropaolo\desktop\dametucosicha\trabalhogbc014\tetris xd\tetris-ataca\trab mesmo\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+
