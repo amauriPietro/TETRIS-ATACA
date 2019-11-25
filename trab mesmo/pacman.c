@@ -66,7 +66,7 @@ void carregaTexturas(){
         sprintf(str,".//Sprites//peca%d.png",i);
         pecas[i] = carregaArqTextura(str);
     }
-    bg = carregaArqTextura(".//Sprites//bg.png");
+    bg = carregaArqTextura(".//Sprites//bg2.png");
 }
 
 // Função que carrega um arquivo de textura do jogo
