@@ -49,7 +49,7 @@ struct TCenario{
 GLuint pecas[5];//pecas
 GLuint grade[2];//grade
 GLuint bg;
-
+GLuint placar[10];
 static void desenhaSprite(float coluna,float linha, GLuint tex);
 static GLuint carregaArqTextura(char *str);
 
@@ -65,6 +65,10 @@ void carregaTexturas(){
     for(i=1; i<=5; i++){
         sprintf(str,".//Sprites//peca%d.png",i);
         pecas[i] = carregaArqTextura(str);
+    }
+    for(i=1; i<=10; i++){
+        sprintf(str,".//Sprites//sprite%d.png",i);
+        placar[i] = carregaArqTextura(str);
     }
     bg = carregaArqTextura(".//Sprites//bg2.png");
 }
@@ -228,7 +232,7 @@ Pacman* pacman_create(int x, int y){
     Pacman* pac = malloc(sizeof(Pacman));
     if(pac != NULL){
         pac->invencivel = 0;
-        pac->pontos = 0;
+        pac->pontos = 1320;
         pac->passo = 4;
         pac->vivo = 1;
         pac->status = 0;
@@ -304,5 +308,19 @@ void pacman_desenha(Pacman *pac){
 
 }
 
-
+void desenha_ponto(Pacman *pac){
+    int i, a, s = 0, y=0, ns = pac->pontos;
+    for(i = 3; i>=0; i--){
+        a = pow(10, i);
+        if(((pac->pontos)-s)/a == 0)
+            desenhaSprite(MAT2X(y),MAT2Y(0),placar[10]);
+        else
+            desenhaSprite(MAT2X(y),MAT2Y(0),placar[(ns-s)/a]);
+        printf("%d ", s);
+        s = (ns/a)*a;
+        ns = pac->pontos-ns;
+        y++;
+    }
+    printf("\n");
+}
 

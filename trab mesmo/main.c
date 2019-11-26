@@ -218,7 +218,7 @@ void desenhaJogo(){
     cenario_desenha(cen);
     checa(cen);
     cai(cen);
-
+    desenha_ponto(pac);
      if(pacman_vivo(pac)){
         //pacman_movimenta(pac, cen);
         pacman_desenha(pac);
