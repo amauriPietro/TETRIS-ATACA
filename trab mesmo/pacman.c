@@ -14,6 +14,7 @@
 #define P 6
 // Tamanho de cada bloco da matriz do jogo na tela
 #define TAM 0.1f
+#define TAMBG 1.6f
 //Funções que convertem a linha e coluna da matriz em uma coordenada de [-1,1]
 #define MAT2X(j) ((j)*0.1f-1)
 #define MAT2Y(i) (0.9-(i)*0.1f)
@@ -29,7 +30,7 @@ const struct TPoint direcoes[4] = {{1,0},{0,1},{-1,0},{0,-1}};
 struct TPacman{
     int status;
     int xi,yi,x,y;
-    int direcao,passo,parcial;
+    int direcao,parcial;
     int pontos;
     int invencivel;
     int vivo;
@@ -40,6 +41,7 @@ struct TPacman{
 
 struct TCenario{
     int mapa[N][P];
+        int vivo;
 };
 
 //==============================================================
@@ -124,9 +126,9 @@ void desenhaBG(float coluna,float linha, GLuint tex){
 
     glBegin(GL_QUADS);
         glTexCoord2f(0.0f,0.0f); glVertex2f(coluna, linha);
-        glTexCoord2f(1.0f,0.0f); glVertex2f(coluna+TAM+1.5, linha);
-        glTexCoord2f(1.0f,1.0f); glVertex2f(coluna+TAM+1.5, linha+TAM+1.5);
-        glTexCoord2f(0.0f,1.0f); glVertex2f(coluna, linha+TAM+1.5);
+        glTexCoord2f(1.0f,0.0f); glVertex2f(coluna+TAMBG, linha);
+        glTexCoord2f(1.0f,1.0f); glVertex2f(coluna+TAMBG, linha+TAMBG);
+        glTexCoord2f(0.0f,1.0f); glVertex2f(coluna, linha+TAMBG);
     glEnd();
 
     glDisable(GL_BLEND);
@@ -136,10 +138,6 @@ void desenhaBG(float coluna,float linha, GLuint tex){
 //==============================================================
 // Cenario
 //==============================================================
-
-static int cenario_EhCruzamento(int x, int y, Cenario* cen);
-//static int cenario_VerificaDirecao(int mat[N][N], int y, int x, int direcao);
-static void cenario_constroiGrafo(Cenario* cen);
 
 // Função que carrega os dados do cenário de um arquivo texto
 Cenario* cenario_carrega(){
@@ -156,7 +154,7 @@ Cenario* cenario_carrega(){
                 srand(rand());
                 a = rand()%6;
                 cen->mapa[5][j] = a;
-            }while((a == cen->mapa[5][j-1] && a == cen->mapa[i][j-2]));
+            }while((a == cen->mapa[5][j-1] && a == cen->mapa[5][j-2]));
         }
     for(i=6; 12>i; i++){
         for(j = 0; 6>j; j++){
@@ -167,6 +165,7 @@ Cenario* cenario_carrega(){
             }while((a == cen->mapa[i][j-1] && a == cen->mapa[i][j-2])||(a == cen->mapa[i-1][j] && a == cen->mapa[i-2][j]));
         }
     }
+    cen->vivo = 1;
     return cen;
 }
 
@@ -191,11 +190,11 @@ void troca(Cenario *cen, int m, int n){
     cen->mapa[m][n] = aux;
 }
 void cai(Cenario *cen){
-    int i, j, aux, ia;
+    int i, j;
     for(i = 1; 12 > i; i++){
-        for(int j=0; 6 > j; j++){
+        for(j=0; 6 > j; j++){
             if(cen->mapa[i][j] == 0 && cen->mapa[i-1][j] != 0){
-                ia = i;
+                //ia = i;
                 // recursiva
                 cen->mapa[i][j] = cen->mapa[i-1][j];
                 cen->mapa[i-1][j] = 0;
@@ -214,18 +213,70 @@ void cai(Cenario *cen){
     }
 }
 void checa(Cenario *cen){
-
+    int i, j, k, cont=0;
+     for(i = 0; 12 > i; i++){
+        for(j = 0; 6 > j; j++){
+            int a = cen->mapa[i][j];
+            if(a == 0)
+                continue;
+            cont = 0;
+            while(cen->mapa[i+cont][j] == a){
+                cont++;
+            }
+            if(cont >= 3){
+                cont=0;
+                while(cen->mapa[i+cont][j] == a){
+                    cen->mapa[i+cont][j] = 0;
+                    cont++;
+                }
+            }
+            /*cont = 0;
+            while(cen->mapa[i][j+cont] == a){
+                cont++;
+            }
+            if(cont >= 3){
+                cont=0;
+                while(cen->mapa[i][j+cont] == a){
+                    cen->mapa[i][j+cont] = 0;
+                    cont++;
+                }
+            }*/
+        }
+     }
 }
-
+void sobe(Cenario *cen){
+    int i, j, ver = 1;
+    for(j = 0; 6 > j; j++){
+        printf("a");
+        if(cen->mapa[0][j] != 0){
+            cen->vivo = 0;
+            printf("k");
+            ver = 0;
+            //scanf("%c");
+        }
+    }
+            for(i = 1; 12 > i; i++){
+                printf("u");
+                for(int j = 0; 6>j; j++){
+                    printf("y");
+                    cen->mapa[i-1][j] = cen->mapa[i][j];
+                }
+            }
+            int a = rand();
+            for(j = 0; 6>j; j++){
+            do{
+                srand(rand());
+                a = rand()%5 + 1;
+                cen->mapa[11][j] = a;
+            }while((a == cen->mapa[11][j-1] && a == cen->mapa[11][j-2]));
+        }
+        printf("\n");
+}
 
 //==============================================================
 // Pacman
 //==============================================================
 
-static int pacman_eh_invencivel(Pacman *pac);
-static void pacman_morre(Pacman *pac);
-static void pacman_pontos_fantasma(Pacman *pac);
-static void pacman_AnimacaoMorte(float coluna,float linha,Pacman* pac);
 
 // Função que inicializa os dados associados ao pacman
 Pacman* pacman_create(int x, int y){
@@ -233,7 +284,6 @@ Pacman* pacman_create(int x, int y){
     if(pac != NULL){
         pac->invencivel = 0;
         pac->pontos = 1320;
-        pac->passo = 4;
         pac->vivo = 1;
         pac->status = 0;
         pac->direcao = 0;
@@ -283,17 +333,14 @@ void comanda_Cursor(Pacman *pac, int direcao, Cenario *cen){
         }
 }
 
-
 // Função que desenha o pacman
 void pacman_desenha(Pacman *pac){
     float linha = pac->y, coluna = pac->x;
 
     if(pac->vivo){
-        // Escolhe o sprite com base na direção
-        int idx = 0;
 
         // Escolhe se desenha com boca aberta ou fechada
-        if(pac->status < 30){
+        if(pac->status < 10){
             desenhaSprite(MAT2X(coluna),MAT2Y(linha), grade[1]);
             desenhaSprite(MAT2X(coluna+1),MAT2Y(linha), grade[1]);
         }
@@ -303,24 +350,23 @@ void pacman_desenha(Pacman *pac){
         }
 
          //Alterna entre cursor maior/menor
-        pac->status = (pac->status+1) % 60;
+        pac->status = (pac->status+1) % 20;
     }
 
 }
 
 void desenha_ponto(Pacman *pac){
-    int i, a, s = 0, y=0, ns = pac->pontos;
+    int i, a, s = 0, y=0, ns, no = pac->pontos;
     for(i = 3; i>=0; i--){
         a = pow(10, i);
-        if(((pac->pontos)-s)/a == 0)
-            desenhaSprite(MAT2X(y),MAT2Y(0),placar[10]);
+        ns = no % a;
+        s = no - ns;
+        if(s/a == 0)
+            desenhaSprite(MAT2X(y),MAT2Y(0), placar[10]);
         else
-            desenhaSprite(MAT2X(y),MAT2Y(0),placar[(ns-s)/a]);
-        printf("%d ", s);
-        s = (ns/a)*a;
-        ns = pac->pontos-ns;
+            desenhaSprite(MAT2X(y),MAT2Y(0), placar[s/a]);
+        no = ns;
         y++;
     }
-    printf("\n");
 }
 

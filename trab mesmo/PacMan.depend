@@ -150,3 +150,24 @@
 	"SOIL.h"
 	"pacman.h"
 
+1574774106 source:c:\users\ingressante\desktop\bakes\tetris-ataca\trab mesmo\main.c
+	"SOIL.h"
+	<windows.h>
+	<gl/gl.h>
+	<stdio.h>
+	<time.h>
+	"pacman.h"
+
+1574164896 c:\users\ingressante\desktop\bakes\tetris-ataca\trab mesmo\soil.h
+
+1574769667 c:\users\ingressante\desktop\bakes\tetris-ataca\trab mesmo\pacman.h
+
+1574775436 source:c:\users\ingressante\desktop\bakes\tetris-ataca\trab mesmo\pacman.c
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<windows.h>
+	<gl/gl.h>
+	"SOIL.h"
+	"pacman.h"
+

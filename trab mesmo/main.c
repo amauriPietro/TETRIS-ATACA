@@ -104,7 +104,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
             SwapBuffers(hDC);
 
-            Sleep(12);
+            Sleep(1);
         }
     }
     // Saiu do laço que desenha os frames?
@@ -214,9 +214,14 @@ void DisableOpenGL (HWND hwnd, HDC hDC, HGLRC hRC)
 // ===================================================================
 
 // Função que desenha cada componente do jogo
+int contt = 0;
 void desenhaJogo(){
     cenario_desenha(cen);
-    checa(cen);
+    //checa(cen);
+    if(contt == 50){
+        sobe(cen);
+        contt = 0;
+    }
     cai(cen);
     desenha_ponto(pac);
      if(pacman_vivo(pac)){
@@ -224,7 +229,7 @@ void desenhaJogo(){
         pacman_desenha(pac);
         int i;
     }
-
+    contt++;
 }
 // Função que inicia o mapa do jogo e as posições iniciais dos personagens
 void iniciaJogo(){
