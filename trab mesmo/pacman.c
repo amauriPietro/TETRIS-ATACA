@@ -181,7 +181,7 @@ void cenario_desenha(Cenario *cen){
     for(i=0; i<N; i++)
         for(j=0; j<P; j++)
             if(cen->mapa[i][j]>0)
-                desenhaSprite(MAT2X(j+7),MAT2Y(i+4),pecas[cen->mapa[i][j]]);
+                desenhaSprite(MAT2X(j+3),MAT2Y(i+4),pecas[cen->mapa[i][j]]);
 
 }
 void troca(Cenario *cen, int m, int n){
@@ -244,7 +244,7 @@ void checa(Cenario *cen){
         }
      }
 }
-void sobe(Cenario *cen){
+int sobe(Cenario *cen){
     int i, j, ver = 1;
     for(j = 0; 6 > j; j++){
         printf("a");
@@ -252,13 +252,14 @@ void sobe(Cenario *cen){
             cen->vivo = 0;
             printf("k");
             ver = 0;
+            break;
             //scanf("%c");
         }
     }
+    if(ver == 0)
+        return 0;
             for(i = 1; 12 > i; i++){
-                printf("u");
                 for(int j = 0; 6>j; j++){
-                    printf("y");
                     cen->mapa[i-1][j] = cen->mapa[i][j];
                 }
             }
@@ -270,7 +271,7 @@ void sobe(Cenario *cen){
                 cen->mapa[11][j] = a;
             }while((a == cen->mapa[11][j-1] && a == cen->mapa[11][j-2]));
         }
-        printf("\n");
+        return ver;
 }
 
 //==============================================================
@@ -283,7 +284,7 @@ Pacman* pacman_create(int x, int y){
     Pacman* pac = malloc(sizeof(Pacman));
     if(pac != NULL){
         pac->invencivel = 0;
-        pac->pontos = 1320;
+        pac->pontos = 0;
         pac->vivo = 1;
         pac->status = 0;
         pac->direcao = 0;
@@ -315,21 +316,21 @@ int pacman_vivo(Pacman *pac){
 
 // Função que comanda o cursor para outra direção
 void comanda_Cursor(Pacman *pac, int direcao, Cenario *cen){
-        if(direcao == 0 && pac->x < 11){
+        if(direcao == 0 && pac->x < 7){
             pac->x ++;
         }
-        if(direcao == 1 && pac->y < 17){
+        if(direcao == 1 && pac->y < 15){
             pac->y ++;
         }
-        if(direcao == 2 && pac-> x > 7){
+        if(direcao == 2 && pac-> x > 3){
             pac->x --;
         }
-        if(direcao == 3 && pac->y > 6){
+        if(direcao == 3 && pac->y > 4){
             pac->y --;
         }
         //troca peças de lugar
         if(direcao == 4){
-            troca(cen, pac->y - 5, pac->x - 1);
+            troca(cen, pac->y - 4, pac->x - 3);
         }
 }
 
@@ -362,9 +363,9 @@ void desenha_ponto(Pacman *pac){
         ns = no % a;
         s = no - ns;
         if(s/a == 0)
-            desenhaSprite(MAT2X(y),MAT2Y(0), placar[10]);
+            desenhaSprite(MAT2X(11+y),MAT2Y(6), placar[10]);
         else
-            desenhaSprite(MAT2X(y),MAT2Y(0), placar[s/a]);
+            desenhaSprite(MAT2X(11+y),MAT2Y(6), placar[s/a]);
         no = ns;
         y++;
     }

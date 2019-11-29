@@ -104,7 +104,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
             SwapBuffers(hDC);
 
-            Sleep(1);
+            Sleep(50);
         }
     }
     // Saiu do laço que desenha os frames?
@@ -218,8 +218,13 @@ int contt = 0;
 void desenhaJogo(){
     cenario_desenha(cen);
     //checa(cen);
-    if(contt == 50){
-        sobe(cen);
+    if(contt == 100){
+        int kek = sobe(cen);
+        printf("%d", kek);
+        if(kek == 0){
+            pacman_destroy(pac);
+        }
+        comanda_Cursor(pac,3,cen);
         contt = 0;
     }
     cai(cen);
@@ -235,7 +240,7 @@ void desenhaJogo(){
 void iniciaJogo(){
     srand(time(NULL));
     cen = cenario_carrega();
-    pac = pacman_create(9,11);
+    pac = pacman_create(5,11);
 
 }
 
